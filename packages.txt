@@ -1,6 +1,6 @@
-streamlit-Dev
-yfinance-Dev
-datetime-Dev
+streamlit
+yfinance
+datetime
 pandas-Dev
 numpy-Dev
 seaborn-Dev

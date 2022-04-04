@@ -9,27 +9,27 @@ Original file is located at
 # Import library
 """
 import streamlit as st 
-import yfinance as yf
+#import yfinance as yf
 import datetime as dt
 import pandas as pd
 import numpy as np
 import seaborn as sns 
-from numpy import arange
+#from numpy import arange
 import matplotlib.pyplot as plt
-from pandas import read_csv
+#from pandas import read_csv
 from sklearn import metrics
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import RandomizedSearchCV
 import plotly.express as px
-import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras import Sequential,layers
-from tensorflow.keras.metrics import RootMeanSquaredError
-from sklearn.metrics import mean_squared_error, r2_score
-import mplfinance as mpf
-from statsmodels.tsa.stattools import acf
+#import tensorflow as tf
+#from tensorflow import keras
+#from tensorflow.keras import Sequential,layers
+#from tensorflow.keras.metrics import RootMeanSquaredError
+#from sklearn.metrics import mean_squared_error, r2_score
+#import mplfinance as mpf
+#from statsmodels.tsa.stattools import acf
 import plotly.graph_objects as go
 
 import warnings

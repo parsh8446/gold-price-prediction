@@ -1,5 +1,12 @@
-streamlit==0.68.0
-pandas==1.1.3
-plotly==4.8.0
-matplotlib==3.2.2
-
+streamlit
+yfinance
+datetime
+pandas
+numpy
+seaborn
+matplotlib
+sklearn
+plotly
+tensorflow
+mplfinance
+statsmodels

@@ -1,19 +1,5 @@
-# pip install streamlit
 streamlit==0.68.0
 pandas==1.1.3
 plotly==4.8.0
 matplotlib==3.2.2
-Pillow==8.0.0
-streamlit
-yfinance-0.1.70-Dev
-datetime
-pandas-Dev
-numpy-Dev
-seaborn-Dev
-matplotlib-Dev
-sklearn-Dev
-plotly-Dev
-tensorflow-Dev
-sklearn-Dev
-mplfinance-Dev
-statsmodels-Dev
+

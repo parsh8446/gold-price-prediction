@@ -1,0 +1,13 @@
+streamlit-Dev
+yfinance-Dev
+datetime-Dev
+pandas-Dev
+numpy-Dev
+seaborn-Dev
+matplotlib-Dev
+sklearn-Dev
+plotly-Dev
+tensorflow-Dev
+sklearn-Dev
+mplfinance-Dev
+statsmodels-Dev

@@ -35,11 +35,6 @@ import plotly.graph_objects as go
 import warnings
 warnings.filterwarnings('ignore')
 
-selectbox = st.sidebar.selectbox(
-    "Model Selection",
-    ["Random Forest", "LGBM & Time Series Split","Linear Model","Exp Model"]
-)
-
 title = st.sidebar.text_input('How many years of dataset Ex: 2y')
 
 

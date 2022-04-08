@@ -100,22 +100,6 @@ with header:
 
     """# Data Visualization"""
 
-    plt.figure(figsize=(7,5))
-    sns.heatmap(df.corr(),cmap='Blues',annot=True)
-
-
-    fig = px.line(price,title='Gold Price',labels={'Date':'Months','value':'Daily Gold price'})
-
-    fig.update_layout(title={'font_family':'Georgia','font_size':23,'x':0.5})
-    #fig.show()
-    st.plotly_chart(fig)
-    fig = go.Figure(data=[go.Candlestick(x=df['Date'],
-                    open=df['Open'],
-                    high=df['High'],
-                    low=df['Low'],
-                    close=df['Close'])])
-    st.plotly_chart(fig)
-    #fig.show()
 
 from statsmodels.tsa.stattools import acf
 # Auto-Correlation Plot useful to analyze and visualize Correlation of data with its lags.

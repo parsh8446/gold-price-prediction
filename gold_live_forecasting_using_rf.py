@@ -37,7 +37,7 @@ warnings.filterwarnings('ignore')
 
 selectbox = st.sidebar.selectbox(
     "Model Selection",
-    ["Random Forest"]
+    ["Random Forest", "LGBM & Time Series Split","Linear Model","Exp Model"]
 )
 
 title = st.sidebar.text_input('How many years of dataset Ex: 2y')
@@ -100,6 +100,11 @@ with header:
 
     """# Data Visualization"""
 
+    plt.figure(figsize=(7,5))
+    sns.heatmap(df.corr(),cmap='Blues',annot=True)
+
+
+
 
 from statsmodels.tsa.stattools import acf
 # Auto-Correlation Plot useful to analyze and visualize Correlation of data with its lags.
@@ -127,20 +132,6 @@ def lag_plot(lags=1):
 
 lag_plot(1)
 
-from statsmodels.tsa.seasonal import seasonal_decompose
-decom_df = seasonal_decompose(price['Close'],period=12)
-fig = px.line(decom_df.trend,title='Trend')
-fig.update_layout(title={'font_family':'Georgia','font_size':23,'x':0.5})
-#fig.show()
-st.plotly_chart(fig)
-fig = px.line(decom_df.seasonal,title='Seasonality')
-fig.update_layout(title={'font_family':'Georgia','font_size':23,'x':0.5})
-#fig.show()
-st.plotly_chart(fig)
-fig = px.line(decom_df.resid,title='Residuals')
-fig.update_layout(title={'font_family':'Georgia','font_size':23,'x':0.5})
-#fig.show()
-st.plotly_chart(fig)
 
 """# Stationarity Check"""
 

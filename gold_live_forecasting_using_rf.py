@@ -8,28 +8,20 @@ Original file is located at
 
 # Import library
 """
-import streamlit as st 
+import streamlit as st
 #import yfinance as yf
 import datetime as dt
 import pandas as pd
 import numpy as np
-import seaborn as sns 
+import seaborn as sns
 #from numpy import arange
 import matplotlib.pyplot as plt
-#from pandas import read_csv
-from sklearn import metrics
+
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import RandomizedSearchCV
 import plotly.express as px
-#import tensorflow as tf
-#from tensorflow import keras
-#from tensorflow.keras import Sequential,layers
-#from tensorflow.keras.metrics import RootMeanSquaredError
-#from sklearn.metrics import mean_squared_error, r2_score
-#import mplfinance as mpf
-#from statsmodels.tsa.stattools import acf
 import plotly.graph_objects as go
 
 import warnings
@@ -104,68 +96,30 @@ with header:
     sns.heatmap(df.corr(),cmap='Blues',annot=True)
 
 
+    fig = px.line(price,title='Gold Price',labels={'Date':'Months','value':'Daily Gold price'})
 
-
-from statsmodels.tsa.stattools import acf
-# Auto-Correlation Plot useful to analyze and visualize Correlation of data with its lags.
-acf_df = pd.DataFrame({'ACF':acf(df["Close"],nlags=df.shape[0])})
-acf_df['Upper Level'] = 1.96 / 1 / (df.shape[0] ** 0.5 )
-acf_df['Lower Level'] = - 1.96 / 1 / (df.shape[0] ** 0.5 )
-fig = px.line(acf_df,title='Autocorrelation Plot',labels={'index':'Lags','value':'Correlation'})
-fig.update_layout(title={'font_family':'Georgia','font_size':23,'x':0.5})
-#fig.show()
-st.plotly_chart(fig)
-
-"""## Function visualise the lag plot"""
-
-# This function will generate an Interactive Scatter Plot to show lags with Previous data
-def lag_plot(lags=1):
-    x = df['Close']
-    y = df['Close'].shift(lags)
-    title = 'Lag Plot of lag ' + str(lags)
-    fig = px.scatter(x=x,y=y,trendline='ols',trendline_color_override='red', title = title,
-                      labels={'x':'Gold Prices','y':'lag of {} on Gold Prices'.format(lags)})
     fig.update_layout(title={'font_family':'Georgia','font_size':23,'x':0.5})
     #fig.show()
     st.plotly_chart(fig)
-"""## Lag plot"""
+    fig = go.Figure(data=[go.Candlestick(x=df['Date'],
+                    open=df['Open'],
+                    high=df['High'],
+                    low=df['Low'],
+                    close=df['Close'])])
+    st.plotly_chart(fig)
+    #fig.show()
 
-lag_plot(1)
 
 
-"""# Stationarity Check"""
 
-from statsmodels.tsa.stattools import adfuller, kpss
-def test_stationarity(data):
-    res = adfuller(data.dropna())
-    st.write('\n ### ADF Test P Value :',round(res[1],5))
-    if res[1] > 0.05 :
-        st.write(' ### This data is not Stationary as per ADF Test')
-    else :
-        st.write(' ### This data is Stationary as per ADF Test')
-        res = kpss(data.dropna())
-        st.write('\n ### KPSS Test P Value :',round(res[1],5))
-    if res[1] < 0.05 :
-        st.write(' ### This data is not Stationary as per KPSS Test')
-    else :
-        st.write(' ### This data is Stationary as per KPSS Test')
-
-test_stationarity(price['Close'])
-
-test_stationarity(price['Close'].diff())
-
-test_stationarity(price['Close'].diff().diff())
-
-px.line(price['Close'].diff().diff())
-
-"""# Model Building"""
+# Model Building"""
 
 price.drop(columns=['Volume','Dividends','Stock Splits'],inplace=True)
 
 x = price.drop(['Close'],axis =1)
 y = price['Close']
 
-"""# Model training, testing and evalution """
+# Model training, testing and evalution """
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.26,  random_state=12)
 
@@ -194,10 +148,7 @@ predict = model.predict(x_test)
 print(predict)
 print(predict.shape)
 
-st.write(" ## Mean Absolute Error:", round(metrics.mean_absolute_error(y_test, predict), 4))
-st.write(" ## Mean Squared Error:", round(metrics.mean_squared_error(y_test, predict), 4))
-st.write("## Root Mean Squared Error:", round(np.sqrt(metrics.mean_squared_error(y_test, predict)), 4))
-st.write(" ## (R^2) Score:", round(metrics.r2_score(y_test, predict), 4))
+
 st.write(f' ## Train Score : {model.score(x_train, y_train) * 100:.2f}% and Test Score : {model.score(x_test, y_test) * 100:.2f}% using Random Tree Regressor.')
 errors = abs(predict - y_test)
 mape = 100 * (errors / y_test)
